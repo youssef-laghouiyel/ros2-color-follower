@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+
+   <xacro:include filename="inertial.xacro" />
+
+    <!-- This file is not a robot in and of itself, it just contains some useful tags that could be included in any robot -->
+
+    <material name="white">
+        <color rgba="1 1 1 1"/>
+    </material>
+
+    <material name="green">
+        <color rgba="0 1 0 1"/>
+    </material>
+    <material name="orange">
+        <color rgba="1 0.3 0.1 1"/>
+    </material>
+
+    <material name="red">
+        <color rgba="1 0 0 1"/>
+    </material>
+
+    <material name="blue">
+        <color rgba="0.2 0.2 1 1"/>
+    </material>
+    <!--Base link and joints-->
+    <link name = "base_link">
+    </link>
+
+
+    <joint name = "base_to_chassis" type = "fixed">
+        <origin xyz = "-0.1 0 0" rpy = "0 0 0"/>
+        <parent link = "base_link" />
+        <child link = "chassis" />
+    </joint>
+
+
+    <link name = "chassis" >
+        <visual>
+            <origin xyz = "0.15 0 0.075"/>
+            <geometry>
+                <box size = "0.3 0.3 0.15"/>
+            </geometry>
+            <material name = "white"/>
+        </visual>
+        <collision>
+            <origin xyz = "0.15 0 0.075"/>
+            <geometry>
+                <box size = "0.3 0.3 0.15"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_box mass = '0.5' x = '0.3' y = '0.3' z = '0.15'/>
+    </link>
+    <gazebo reference = "chassis">
+        <material>Gazebo/White</material>
+    </gazebo>
+
+
+    <!-- left and right wheels -->
+
+
+    <joint name = "right_wheel_joint" type = "continuous">
+        <origin xyz = "0 -0.175 0" rpy = "${pi/2} 0 0"/>
+        <parent link = "base_link"/>
+        <child link = "right_wheel_link"/>
+        <axis xyz = "0 0 -1"/>
+    </joint>
+
+
+    <link name = "right_wheel_link">
+        <visual>
+           <origin xyz = "0 0 0" rpy = "0 0 0"/>
+           <geometry>
+                <cylinder radius="0.05" length="0.04" />
+            </geometry>
+            <material name = "blue"/>
+        </visual>
+        <collision>
+           <geometry>
+                <cylinder radius="0.05" length="0.04" />
+            </geometry>
+        </collision>
+        <xacro:inertial_cylinder_z mass = '0.1' radius = '0.05' length = '0.04'/>
+    </link>
+
+    <gazebo reference = "right_wheel_link">
+        <material>Gazebo/Blue</material>
+    </gazebo>
+
+
+    <joint name = "left_wheel_joint" type = "continuous">
+        <origin xyz = "0 0.175 0" rpy = "-${pi/2} 0 0"/>
+        <parent link = "base_link"/>
+        <child link = "left_wheel_link"/>
+        <axis xyz = "0 0 1"/>
+    </joint>
+    <link name = "left_wheel_link">
+        <visual>
+           <origin xyz = "0 0 0" rpy = "0 0 0"/>
+           <geometry>
+                <cylinder radius="0.05" length="0.04" />
+            </geometry>
+            <material name = "blue"/>
+        </visual>
+        <collision>
+           <geometry>
+                <cylinder radius="0.05" length="0.04" />
+            </geometry>
+        </collision>
+        <xacro:inertial_cylinder_z mass = '0.1' radius = '0.05' length = '0.04'/>
+            
+    </link>
+    <gazebo reference = "left_wheel_link">
+        <material>Gazebo/Blue</material>
+    </gazebo>
+    <!-- let us build a caster-->
+    <joint name = 'caster_joint' type = 'fixed'>
+        <origin xyz = '0.24 0 0' rpy = '0 0 0'/>
+        <parent link = 'chassis'/>
+        <child link = 'caster'/>
+    </joint>
+    <link name = 'caster'>
+        <visual>
+            <origin xyz = '0 0 0' rpy = '0 0 0'/>
+            <geometry>
+                <sphere radius="0.05"/>
+            </geometry>
+            <material name = 'black'/>
+        </visual>
+        <collision>
+            <geometry>
+                <sphere radius="0.05"/>
+            </geometry>
+        </collision>
+    </link>
+    <gazebo reference = "caster">
+        <material>Gazebo/Black</material>
+        <mu1 value = "0.001"/>
+        <mu2 value = "0.001"/>
+    </gazebo>
+</robot>
+
+
