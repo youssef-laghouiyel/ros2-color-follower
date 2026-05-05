@@ -36,7 +36,8 @@ setup(
     entry_points={
         'console_scripts': [
             "image_process = diff_robot.image_processing:main",
-            "control_diff = diff_robot.control_diff:main"
+            "control_diff = diff_robot.control_diff:main",
+            "teleop = diff_robot.teleop:main"
         ],
     },
 )
