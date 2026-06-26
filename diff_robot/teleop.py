@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+
 import rclpy
 from geometry_msgs.msg import Twist
 import sys
@@ -19,6 +20,9 @@ moveBindings = {
     '.': (-1, -1),
     'k': ( 0,  0),
 }
+
+
+
 
 speedBindings = {
     'q': (1.1, 1.1),

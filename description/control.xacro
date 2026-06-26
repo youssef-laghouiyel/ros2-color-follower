@@ -10,8 +10,8 @@
 
 
             <!--limits of the wheels (torq)-->
-            <max_wheel_torque>200</max_wheel_torque>
-            <max_wheel_acceleration>10.0</max_wheel_acceleration>
+            <max_wheel_torque>250</max_wheel_torque>
+            <max_wheel_acceleration>50.0</max_wheel_acceleration>
 
             <!--output-->
 

@@ -20,7 +20,12 @@ setup(
             'description/control.xacro',
             'description/lidar.xacro',
             'description/camera.xacro',
-        ])
+            'description/imu.xacro',
+        ]) , 
+        ('share/' + package_name + '/world' , [
+            'world/diff_robot.world' ,
+        ]) , 
+
     ],
     install_requires=['setuptools'],
     zip_safe=True,

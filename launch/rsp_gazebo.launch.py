@@ -15,6 +15,10 @@ def generate_launch_description():
     # full path of the urdf file
     full_path_to_description = os.path.join(get_package_share_directory(pkg_name) , subpath_to_description) 
     # we need to xacro.urdf > .urdf
+
+    world_file_name = "diff_robot.world"
+    world_path = os.path.join(get_package_share_directory(pkg_name), 'world', world_file_name)
+
     xacro_description_file = xacro.process_file(full_path_to_description).toxml()
     # configure the robot state publisher node
     rspLaunchFile = Node(
@@ -28,7 +32,13 @@ def generate_launch_description():
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([os.path.join(
             get_package_share_directory('gazebo_ros'), 'launch'), '/gazebo.launch.py']),
+            launch_arguments={'world': world_path}.items()
         )
+
+
+
+
+    # pour spawn the entity
     spawn_entity = Node(package='gazebo_ros', executable='spawn_entity.py',
                     arguments=['-topic', 'robot_description',
                                 '-entity', 'my_bot'],
